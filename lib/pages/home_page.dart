@@ -21,7 +21,9 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.logout, color: Colors.blue),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, "/");
+            },
           ),
         ],
       ),

@@ -50,8 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (emailController.text == "jvrezendemoura@gmail.com" &&
                           passwordController.text == "32322916a") {
                         // Redireciona para a tela principal e remove o botão "voltar"
-                        Navigator.pop(context);
-                        Navigator.pushReplacementNamed(context, '/');
+                        Navigator.pushReplacementNamed(context, '/home');
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text("Credenciais inválidas")),

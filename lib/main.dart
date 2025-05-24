@@ -20,10 +20,10 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
       ),
-      initialRoute: '/login',
+      initialRoute: '/',
       routes: {
-        '/': (context) => const HomePage(),
-        '/login': (context) => const LoginPage(),
+        '/': (context) => const LoginPage(),
+        '/home': (context) => const HomePage(),
         '/signin': (context) => const SigninPage(),
       },
     );
