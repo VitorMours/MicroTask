@@ -1,5 +1,4 @@
 import "package:drift/drift.dart";
-import "package:sqflite/sqflite.dart";
 
 class AppConfigModel extends Table{
 

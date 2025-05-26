@@ -36,7 +36,6 @@ dependencies:
   cupertino_icons: ^1.0.8
   gap: ^3.0.1
   google_fonts: ^6.2.1
-  sqflite: ^2.4.2
   drift: ^2.26.1
 
 dev_dependencies:

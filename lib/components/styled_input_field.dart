@@ -21,20 +21,21 @@ class StyledInputField extends StatefulWidget {
 class _StyledInputFieldState extends State<StyledInputField> {
   bool _isObscure = true;
 
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
       obscureText: widget.isPassword ? _isObscure : false,
-      style: const TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
-        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color:Colors.white)),
-        border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white),
+        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
+        border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black),
         ),
         icon: widget.icon != null ? Icon(widget.icon) : null,
-        iconColor: Colors.white70,
+        iconColor: Colors.black,
         labelText: widget.labelText,
-        labelStyle: const TextStyle(color: Colors.white70),
+        labelStyle: TextStyle(color: Colors.black),
         suffixIcon: widget.isPassword
             ? IconButton(
                 icon: Icon(
