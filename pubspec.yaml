@@ -37,6 +37,7 @@ dependencies:
   gap: ^3.0.1
   google_fonts: ^6.2.1
   drift: ^2.26.1
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:

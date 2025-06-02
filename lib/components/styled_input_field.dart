@@ -40,7 +40,7 @@ class _StyledInputFieldState extends State<StyledInputField> {
             ? IconButton(
                 icon: Icon(
                   _isObscure ? Icons.visibility : Icons.visibility_off,
-                  color: Colors.white70,
+                  color: Colors.black,
                 ),
                 onPressed: () {
                   setState(() {
