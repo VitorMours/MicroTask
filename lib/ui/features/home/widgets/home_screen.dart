@@ -16,17 +16,21 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void initState(){
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
       body: SafeArea(
-        child: ListenableBuilder(listenable: viewModel, builder: (context, _){}),
+        child: ListenableBuilder(listenable: widget.viewModel, builder: (context, _)
+        {
+
+
+        }),
       ),
+      bottomNavigationBar: BottomNavigationBar()
+
     );
   }
 }
