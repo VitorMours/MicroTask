@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nested/nested.dart';
+import 'package:todo_riverpod/ui/features/%20login/viewmodel/login_viewmodel.dart';
+import 'data/models/user.dart';
 import 'pages/home_page.dart';
 import 'pages/login_page.dart';
 import 'pages/signin_page.dart';
+import "package:provider/provider.dart";
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(
+    MultiProvider(
+      providers: <SingleChildWidget>[
+        ChangeNotifierProvider(
+          create: (_) => LoginViewModel(UserModel(email: null, password: null)),
+        ),
+      ],
+      child: MyApp()
+    )
+  );
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
