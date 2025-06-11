@@ -24,6 +24,9 @@ class HomeViewModel extends ChangeNotifier {
 
 
 
+
+
+
   // TODO: Criar as funcoes que vao ser injetadas por meio do viewmodel
   void updateTaskNameController(){}
   void updateTaskDescriptionController(){}

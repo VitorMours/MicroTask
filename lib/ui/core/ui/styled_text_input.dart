@@ -29,9 +29,7 @@ class _StyledInputFieldState extends State<StyledTextInput> {
       obscureText: widget.isPassword ? _isObscure : false,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
-        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black)),
-        border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.black),
-        ),
+
         icon: widget.icon != null ? Icon(widget.icon) : null,
         iconColor: Colors.black,
         labelText: widget.labelText,

@@ -26,21 +26,19 @@ class LoginViewModel extends ChangeNotifier {
   get formKey => _formKey;
 
 
-  authenticate(context) {
+  Future<bool> authenticate() async {
     if (_formKey.currentState!.validate()) {
-      if (emailController.text ==
-          "jvrezendemoura@gmail.com" &&
-          passwordController.text == "32322916a") {
-        notifyListeners();
-        Navigator.pushReplacementNamed(context, '/home');
+      final email = emailController.text.trim();
+      final password = passwordController.text;
+
+      if (email == "jvrezendemoura@gmail.com" && password == "32322916a") {
+        notifyListeners(); // Caso queira atualizar algo na UI
+        return true;
       } else {
         notifyListeners();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Credenciais inválidas"),
-          ),
-        );
+        return false;
       }
     }
+    return false;
   }
 }

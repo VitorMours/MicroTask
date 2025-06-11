@@ -47,7 +47,17 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: viewModel.authenticate(context),
+                      onPressed: () async {
+                        if (await viewModel.authenticate()) {
+                          Navigator.pushReplacementNamed(context, '/home');
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Credenciais inválidas"),
+                            ),
+                          );
+                        }
+                      },
                       child: const Text("Log in"),
                     ),
                   ],
