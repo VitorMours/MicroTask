@@ -28,8 +28,8 @@ final class AppColors {
     onPrimary: AppColors.primary,
     secondary: AppColors.secondary,
     onSecondary: AppColors.secondary,
-    surface: AppColors.black,
-    onSurface: AppColors.black,
+    surface: AppColors.white,
+    onSurface: AppColors.white,
     error: AppColors.black,
     onError: AppColors.error,
   );
@@ -37,28 +37,42 @@ final class AppColors {
 
 abstract final class AppTheme {
   static final _textTheme = TextTheme(
-    titleLarge: GoogleFonts.nunitoSans(
-      fontWeight: FontWeight.w800,
-      fontSize: 25,
-      color: AppColors.black,
+    headlineLarge: TextStyle(fontSize: 32, color: Colors.black, fontWeight: FontWeight.w500),
+    headlineSmall: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w400),
+    titleMedium: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w500),
+    bodyLarge: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w400),
+    bodyMedium: TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.w400),
+    bodySmall: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      color: Colors.black,
     ),
-    titleMedium: TextStyle(),
-    titleSmall: TextStyle(),
-    labelLarge: TextStyle(),
-    labelMedium: TextStyle(),
-    labelSmall: TextStyle(),
-    displayLarge: TextStyle(),
-    displayMedium: TextStyle(),
-    displaySmall: TextStyle(),
+    labelSmall: TextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.w500,
+      color: Colors.black,
+    ),
+    labelLarge: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w400,
+      color: Colors.black,
+    ),
   );
+
   static final _textInputTheme = InputDecorationTheme(
-    border: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.black)),
+    border: UnderlineInputBorder(
+      borderSide: BorderSide(color: AppColors.black),
+    ),
     focusedBorder: UnderlineInputBorder(
       borderSide: BorderSide(color: AppColors.primary, width: 1.3),
     ),
-    enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.black)),
+    enabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: AppColors.black),
+    ),
 
-    errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.error)),
+    errorBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: AppColors.error),
+    ),
     focusedErrorBorder: UnderlineInputBorder(
       borderSide: BorderSide(color: AppColors.error, width: 1.3),
     ),
@@ -66,13 +80,20 @@ abstract final class AppTheme {
 
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
+    textTheme: _textTheme,
     colorScheme: AppColors.lightColorScheme,
-    inputDecorationTheme: _textInputTheme
+    inputDecorationTheme: _textInputTheme,
   );
 
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
+    textTheme: _textTheme,
     colorScheme: AppColors.darkColorScheme,
-    inputDecorationTheme: _textInputTheme
+    inputDecorationTheme: _textInputTheme,
   );
+
+
+  static final snackBarThewmeData = SnackBarThemeData();
+
 }
+

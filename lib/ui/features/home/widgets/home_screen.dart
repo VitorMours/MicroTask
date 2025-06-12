@@ -1,6 +1,5 @@
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
-import "../../../core/ui/styled_text_input.dart";
 import "package:provider/provider.dart";
 import "../viewmodel/home_viewmodel.dart";
 
@@ -76,11 +75,8 @@ class _HomePageState extends State<HomePage> {
                               horizontal: 20,
                               vertical: 15,
                             ),
-                            child: StyledTextInput(
+                            child: TextFormField(
                               controller: taskName,
-                              // TODO: Modificar o controller pro que pertence a viewmodel
-                              labelText: "Task Name",
-                              icon: Icons.drive_file_rename_outline,
                             ),
                           ),
 
@@ -89,18 +85,14 @@ class _HomePageState extends State<HomePage> {
                               horizontal: 20,
                               vertical: 15,
                             ),
-                            child: StyledTextInput(
+                            child: TextFormField(
                               controller: taskDescription,
-                              // TODO: Modificar o controler para o que pertence a viewmodel
-                              labelText: "Task Description",
-                              icon: Icons.description,
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 12),
                             child: ElevatedButton(
                               onPressed: () {},
-                              // TODO: Especificar o comportamento de adicioanr task dentro do viewmodel, e verificar dele modificar
                               // outro elemento que seja de responsabilidade de renderizar as tasks
                               child: Text("Criar Task"),
                             ),

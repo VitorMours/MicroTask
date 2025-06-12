@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_riverpod/ui/core/ui/styled_text_input.dart';
 
 import '../../../../data/models/user.dart';
 import '../viewmodel/login_viewmodel.dart';
@@ -28,27 +27,19 @@ class LoginPage extends StatelessWidget {
                         vertical: 15,
                         horizontal: 2,
                       ),
-                      child: StyledTextInput(
-                        controller: viewModel.emailController,
-                        icon: Icons.email,
-                        labelText: "Email",
-                      ),
+                      child: TextFormField(),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: 15,
                         horizontal: 2,
                       ),
-                      child: StyledTextInput(
-                        controller: viewModel.passwordController,
-                        icon: Icons.password,
-                        labelText: "Password",
-                        isPassword: true,
-                      ),
+                      child: TextFormField(obscureText: true),
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        if (await viewModel.authenticate()) {
+                        bool authenticate = await await viewModel.authenticate();
+                        if (authenticate) {
                           Navigator.pushReplacementNamed(context, '/home');
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
