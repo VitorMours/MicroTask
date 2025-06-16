@@ -7,7 +7,7 @@ class HomeViewModel extends ChangeNotifier {
 
   TextEditingController taskNameController = TextEditingController();
   TextEditingController taskDescriptionController = TextEditingController();
-
+  final int _taskQuantity = 1;
 
   HomeViewModel({
     required UserRepository userRepository,
@@ -19,10 +19,13 @@ class HomeViewModel extends ChangeNotifier {
   final TaskRepository _taskRepository;
 
 
+  // TaskModel task
+   addTask(){
 
-  void addTask(TaskModel task){}
+    notifyListeners();
+  }
 
-
+  get taskQuantity => _taskQuantity;
 
 
 

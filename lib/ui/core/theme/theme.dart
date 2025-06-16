@@ -4,6 +4,7 @@ import "package:google_fonts/google_fonts.dart";
 
 final class AppColors {
   static final black = Color(0xFF242424);
+  static final hint = Color(0xFF929292);
   static final white = Color(0xFFf2f2f2);
   static final primary = Color(0xFF077d71);
   static final secondary = Color(0xFF3ec7b9);
@@ -59,7 +60,16 @@ abstract final class AppTheme {
     ),
   );
 
+
+  static final _appBarTheme = AppBarTheme(
+      titleTextStyle: TextStyle(
+        color: AppColors.black,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+  );
   static final _textInputTheme = InputDecorationTheme(
+    hintStyle: TextStyle(color: AppColors.hint),
     border: UnderlineInputBorder(
       borderSide: BorderSide(color: AppColors.black),
     ),
@@ -78,22 +88,44 @@ abstract final class AppTheme {
     ),
   );
 
+  static final snackBarThemeData = SnackBarThemeData(
+    backgroundColor: AppColors.tertiary
+  );
+
+  static final bottomAppBarThemeData = BottomAppBarTheme(
+    color: AppColors.tertiary,
+    surfaceTintColor: AppColors.tertiary
+  );
+  static final _listTileTheme = ListTileThemeData(
+    textColor: AppColors.black,
+    tileColor: AppColors.white,
+    leadingAndTrailingTextStyle: TextStyle(color: AppColors.black),
+    iconColor: AppColors.black
+
+
+  );
+
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
+    appBarTheme: _appBarTheme,
     textTheme: _textTheme,
     colorScheme: AppColors.lightColorScheme,
     inputDecorationTheme: _textInputTheme,
+    snackBarTheme: snackBarThemeData,
+    bottomAppBarTheme: bottomAppBarThemeData,
+    listTileTheme: _listTileTheme
   );
 
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
+    appBarTheme: _appBarTheme,
     textTheme: _textTheme,
     colorScheme: AppColors.darkColorScheme,
     inputDecorationTheme: _textInputTheme,
+    snackBarTheme: snackBarThemeData,
+    bottomAppBarTheme: bottomAppBarThemeData,
+    listTileTheme: _listTileTheme
   );
-
-
-  static final snackBarThewmeData = SnackBarThemeData();
 
 }
 

@@ -28,17 +28,14 @@ class LoginViewModel extends ChangeNotifier {
 
   Future<bool> authenticate() async {
     if (_formKey.currentState!.validate()) {
-      final email = emailController.text.trim();
+      final email = emailController.text;
       final password = passwordController.text;
 
       if (email == "jvrezendemoura@gmail.com" && password == "32322916a") {
-        notifyListeners(); // Caso queira atualizar algo na UI
         return true;
-      } else {
-        notifyListeners();
-        return false;
       }
     }
     return false;
   }
+
 }

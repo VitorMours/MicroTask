@@ -7,10 +7,10 @@ import '../viewmodel/login_viewmodel.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Center(
         child: Consumer<LoginViewModel>(
           builder: (context, viewModel, child) {
@@ -27,25 +27,30 @@ class LoginPage extends StatelessWidget {
                         vertical: 15,
                         horizontal: 2,
                       ),
-                      child: TextFormField(),
+                      child: TextFormField(
+                        controller: viewModel.emailController,
+                        decoration: InputDecoration(hintText: "Email"),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: 15,
                         horizontal: 2,
                       ),
-                      child: TextFormField(obscureText: true),
+                      child: TextFormField(
+                        controller: viewModel.passwordController,
+                        decoration: InputDecoration(hintText: "Password"),
+                        obscureText: true,
+                      ),
                     ),
                     ElevatedButton(
-                      onPressed: () async {
-                        bool authenticate = await await viewModel.authenticate();
-                        if (authenticate) {
+                      onPressed:  () async {
+                        final success = await viewModel.authenticate();
+                        if (success) {
                           Navigator.pushReplacementNamed(context, '/home');
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Credenciais inválidas"),
-                            ),
+                            const SnackBar(content: Text("Credenciais inválidas")),
                           );
                         }
                       },
