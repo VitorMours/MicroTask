@@ -3,7 +3,6 @@ class UserModel {
   // String _name;
   String _email;
   String _password;
-  // "Name",
   List<String> fields = ["Email","Password"];
 
   // Constructor

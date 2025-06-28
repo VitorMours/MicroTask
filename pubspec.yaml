@@ -37,8 +37,8 @@ dependencies:
   gap: ^3.0.1
   google_fonts: ^6.2.1
   drift: ^2.26.1
-  shared_preferences: ^2.5.3
   provider: ^6.1.5
+  supabase_flutter: ^2.0.0
 
 dev_dependencies:
   flutter_test:

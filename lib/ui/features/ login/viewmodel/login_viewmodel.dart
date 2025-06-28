@@ -13,6 +13,8 @@ class LoginViewModel extends ChangeNotifier {
   LoginViewModel(userModel);
 
 
+  get formKey => _formKey;
+
   void updateEmailController(String text) {
     emailController.text = text;
     notifyListeners();
@@ -22,9 +24,6 @@ class LoginViewModel extends ChangeNotifier {
     passwordController.text = text;
     notifyListeners();
   }
-
-  get formKey => _formKey;
-
 
   Future<bool> authenticate() async {
     if (_formKey.currentState!.validate()) {

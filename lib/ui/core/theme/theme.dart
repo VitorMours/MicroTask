@@ -39,8 +39,8 @@ final class AppColors {
 abstract final class AppTheme {
   static final _textTheme = TextTheme(
     headlineLarge: TextStyle(fontSize: 32, color: Colors.black, fontWeight: FontWeight.w500),
+    headlineMedium: TextStyle(fontSize: 24, color: Colors.black, fontWeight: FontWeight.w500),
     headlineSmall: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w400),
-    titleMedium: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w500),
     bodyLarge: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w400),
     bodyMedium: TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.w400),
     bodySmall: TextStyle(
