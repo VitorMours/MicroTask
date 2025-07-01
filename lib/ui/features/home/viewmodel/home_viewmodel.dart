@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:supabase_flutter/supabase_flutter.dart";
 import "../../../../data/repositories/task_repository.dart";
 import "../../../../data/repositories/user_repository.dart";
+import "../../../../data/services/supabase_task_service.dart";
 import "../../../../models/task_model.dart";
 
 class HomeViewModel extends ChangeNotifier {
@@ -20,7 +21,6 @@ class HomeViewModel extends ChangeNotifier {
   final UserRepository _userRepository;
 
   ValueNotifier<bool> get showBottomSheetNotifier => _showBottomSheetNotifier;
-
   int get taskQuantity => _taskQuantity;
   List get taskList => _taskList;
 
@@ -32,26 +32,24 @@ class HomeViewModel extends ChangeNotifier {
     _taskList = list;
     notifyListeners();
   }
-
-  void updateTaskNameController(String text) {
+  set TaskNameController(String text) {
     taskNameController.text = text;
     notifyListeners();
   }
-
-  void updateTaskDescriptionController(String text) {
+  set TaskDescriptionController(String text) {
     taskDescriptionController.text = text;
     notifyListeners();
   }
 
-  void getTasks() {
-    final future = Supabase.instance.client.from("tasks").select();
+
+  Future<List> fetchTasks() async {
+    List tasks = await SupabaseTaskService.getTasks();
+    taskList = tasks;
+    return tasks;
   }
 
 
-  // TODO: Dentro dessa fun;'ao que devno aidicionar a nova task, e colocar ela dentro da lsita
-
   Future<void> createTask() async {
-    taskQuantity += 1;
     var table = Supabase.instance.client.from("tasks");
 
     await table.insert({
@@ -60,11 +58,16 @@ class HomeViewModel extends ChangeNotifier {
       "conclusion": false,
     });
 
+    // Recarrega a lista com as tasks atualizadas
+    final response = await table.select();
 
-
+    taskList = response; // <-- dispara o notifyListeners()
     taskNameController.clear();
     taskDescriptionController.clear();
-    notifyListeners();
+  }
+
+  void toggleTaskConclusion(int id){
+    // TODO: Preciso fazer com que a task fique trocando a partir do momento em qe clico na checkbox
   }
 
   @override

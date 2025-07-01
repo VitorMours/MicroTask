@@ -5,6 +5,7 @@ import "package:supabase_flutter/supabase_flutter.dart";
 import "../../../core/ui/bottom_navigation.dart";
 import "../viewmodel/home_viewmodel.dart";
 import "package:gap/gap.dart";
+import "../../../../data/services/supabase_task_service.dart";
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,20 +18,13 @@ class _HomePageState extends State<HomePage> {
   int? tableQuantity;
   var table;
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    getDatabase();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<HomeViewModel>(context, listen: false).fetchTasks();
+    });
   }
 
-  getDatabase() async {
-    tableQuantity = await Supabase.instance.client.from("tasks").count();
-    table = await Supabase.instance.client.from("tasks").select();
-    final viewModelState = Provider.of<HomeViewModel>(context,listen: false);
-    viewModelState.taskList = table;
-    print(tableQuantity);
-    print("oi");
-
-  }
 
 
 
@@ -89,25 +83,32 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(title: Text("Micro Tasks"), centerTitle: true),
       body: Consumer<HomeViewModel>(
         builder: (context, viewModel, child) {
-          return ListView.separated(
-            itemCount: viewModel.taskQuantity,
-            separatorBuilder: (_, _) => Divider(),
+          return ListView.builder(
+            itemCount: viewModel.taskList.length,
             itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                leading: Icon(Icons.list),
-                title: Text(viewModel.taskList[index].name),
-                trailing: Wrap(
-                  children: [
-                    Checkbox(
-                      side: BorderSide(color: Colors.black, width: 2),
-                      value: viewModel.taskList[index].conclusion,
-                      onChanged: (bool? value) {
-                        setState((){
-                          viewModel.taskList[index].conclusion != value;
-                        });
-                      },
-                    ),
-                  ],
+              final task = viewModel.taskList[index];
+              final taskName = task["name"] ?? "";
+              final taskDescription = task["description"] ?? "";
+              return Card(
+                child: ListTile(
+                  leading: Icon(Icons.list),
+                  title: Text(taskName),
+                  subtitle: taskDescription.isNotEmpty
+                      ? Text(taskDescription, style: TextStyle(color:Colors.grey))
+                      : null,
+                  trailing: Wrap(
+                    children: [
+                      Checkbox(
+                        side: BorderSide(color: Colors.black, width: 2),
+                        value: viewModel.taskList[index]["conclusion"],
+                        onChanged: (bool? value) {
+                          setState((){
+                            viewModel.toggleTaskConclusion(viewModel.taskList[index]["id"]);
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
