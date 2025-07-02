@@ -14,6 +14,7 @@ class HomeViewModel extends ChangeNotifier {
   TextEditingController taskDescriptionController = TextEditingController();
   int _taskQuantity = 0;
   List _taskList = [];
+  bool _isLoading = true;
 
   HomeViewModel({required UserRepository userRepository})
     : _userRepository = userRepository;
@@ -23,6 +24,7 @@ class HomeViewModel extends ChangeNotifier {
   ValueNotifier<bool> get showBottomSheetNotifier => _showBottomSheetNotifier;
   int get taskQuantity => _taskQuantity;
   List get taskList => _taskList;
+  bool get isLoading => _isLoading;
 
   set taskQuantity(int quantity) {
     _taskQuantity = quantity;
@@ -40,11 +42,17 @@ class HomeViewModel extends ChangeNotifier {
     taskDescriptionController.text = text;
     notifyListeners();
   }
+  set isLoading(bool value){
+    _isLoading = value;
+    notifyListeners();
+  }
 
 
   Future<List> fetchTasks() async {
+    _isLoading = true;
     List tasks = await SupabaseTaskService.getTasks();
     taskList = tasks;
+    _isLoading = false;
     return tasks;
   }
 
