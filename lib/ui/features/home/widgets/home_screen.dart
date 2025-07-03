@@ -67,7 +67,10 @@ class _HomePageState extends State<HomePage> {
                       Gap(24),
                       ElevatedButton(
                         child: Text("Criar task"),
-                        onPressed: () => viewModel.createTask(),
+                        onPressed: () {
+                          viewModel.createTask();
+                          Navigator.of(context).pop();
+                        },
                       ),
                     ],
                   ),
@@ -91,7 +94,7 @@ class _HomePageState extends State<HomePage> {
             return Center(child: CircularProgressIndicator(strokeWidth: 2));
           } else {
             return ListView.builder(
-              itemCount: viewModel.taskList.length+1,
+              itemCount: viewModel.taskList.length + 1,
               itemBuilder: (BuildContext context, int index) {
                 if (index == viewModel.taskList.length) {
                   return SizedBox(height: 40.0);
@@ -118,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                               setState(() {
                                 viewModel.toggleTaskConclusion(
                                   viewModel.taskList[index]["id"],
-                                  index
+                                  index,
                                 );
                               });
                             },

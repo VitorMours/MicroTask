@@ -75,11 +75,21 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   Future<void> toggleTaskConclusion(int id, int index) async {
-    var task = await Supabase.instance.client.from("tasks").select().eq("id", id);
-    var conclusion = task[0]["conclusion"];
-    taskList[index]["conclusion"] = !conclusion;
+    final currentTask = _taskList[index];
+    final previousValue = currentTask["conclusion"];
+    final newValue = !previousValue;
+
+    _taskList[index]["conclusion"] = newValue;
     notifyListeners();
-    // await Supabase.instance.client.from("tasks").update({"conclusion": !conclusion}).eq("id", id);
+
+    try {
+      final table = Supabase.instance.client.from("tasks");
+      await table.update({"conclusion": newValue}).eq("id", id);
+    } catch (e) {
+      _taskList[index]["conclusion"] = previousValue;
+      notifyListeners();
+      debugPrint("Erro ao atualizar task: $e");
+    }
   }
 
   @override
