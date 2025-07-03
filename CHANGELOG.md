@@ -64,5 +64,5 @@ Future<void> toggleTaskConclusion(int id, int index) async {
 
 Com isso, temos que a busca dentro do banco de dados, atrasa a responsividade que devemos ter dentro
 da nossa interface, dificultando o entendimento do usuário, do funcionamento ou do erro da task.
-
+    
 
