@@ -74,8 +74,12 @@ class HomeViewModel extends ChangeNotifier {
     taskDescriptionController.clear();
   }
 
-  void toggleTaskConclusion(int id){
-    // TODO: Preciso fazer com que a task fique trocando a partir do momento em qe clico na checkbox
+  Future<void> toggleTaskConclusion(int id, int index) async {
+    var task = await Supabase.instance.client.from("tasks").select().eq("id", id);
+    var conclusion = task[0]["conclusion"];
+    taskList[index]["conclusion"] = !conclusion;
+    notifyListeners();
+    // await Supabase.instance.client.from("tasks").update({"conclusion": !conclusion}).eq("id", id);
   }
 
   @override

@@ -118,6 +118,7 @@ class _HomePageState extends State<HomePage> {
                               setState(() {
                                 viewModel.toggleTaskConclusion(
                                   viewModel.taskList[index]["id"],
+                                  index
                                 );
                               });
                             },
