@@ -63,6 +63,9 @@ Future<void> toggleTaskConclusion(int id, int index) async {
 ```
 
 Com isso, temos que a busca dentro do banco de dados, atrasa a responsividade que devemos ter dentro
-da nossa interface, dificultando o entendimento do usuário, do funcionamento ou do erro da task.
+da nossa interface, dificultando o entendimento do usuário, do funcionamento ou do erro da task. Portanto,
+deve-se ter em mente a necessidade de ao fazer o uso de alguma API, ou comunicação com o back-end, primeiro 
+responder dentro da interface, de modo a facilitar o entendimento imediato da ação do usuário, e somente 
+posteriormente, fazer a ação dentro do back-end
     
 
