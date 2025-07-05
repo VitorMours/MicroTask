@@ -47,6 +47,7 @@ class LoginPage extends StatelessWidget {
                       onPressed:  () async {
                         final success = await viewModel.authenticate();
                         if (success) {
+                          viewModel.cleanControllers();
                           Navigator.pushReplacementNamed(context, '/home');
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(

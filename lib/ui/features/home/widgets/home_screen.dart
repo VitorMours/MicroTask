@@ -2,6 +2,7 @@ import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 import "package:supabase_flutter/supabase_flutter.dart";
+import "package:todo_riverpod/ui/core/ui/styled_drawer.dart";
 import "../../../core/ui/bottom_navigation.dart";
 import "../viewmodel/home_viewmodel.dart";
 import "package:gap/gap.dart";
@@ -38,7 +39,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height / 2,
                 child: Padding(
@@ -87,7 +88,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      appBar: AppBar(title: Text("Micro Tasks"), centerTitle: true),
+      drawer: StyledDrawer(),
+      appBar: AppBar(
+        title: Text("Micro Tasks"),
+        iconTheme: IconThemeData(color: Colors.black),
+        centerTitle: true,
+      ),
       body: Consumer<HomeViewModel>(
         builder: (context, viewModel, child) {
           if (viewModel.isLoading) {
@@ -102,31 +108,38 @@ class _HomePageState extends State<HomePage> {
                   final task = viewModel.taskList[index];
                   final taskName = task["name"] ?? "";
                   final taskDescription = task["description"] ?? "";
-                  return Card(
-                    child: ListTile(
-                      leading: Icon(Icons.list),
-                      title: Text(taskName),
-                      subtitle: taskDescription.isNotEmpty
-                          ? Text(
-                              taskDescription,
-                              style: TextStyle(color: Colors.grey),
-                            )
-                          : null,
-                      trailing: Wrap(
-                        children: [
-                          Checkbox(
-                            side: BorderSide(color: Colors.black, width: 2),
-                            value: viewModel.taskList[index]["conclusion"],
-                            onChanged: (bool? value) {
-                              setState(() {
-                                viewModel.toggleTaskConclusion(
-                                  viewModel.taskList[index]["id"],
-                                  index,
-                                );
-                              });
-                            },
-                          ),
-                        ],
+                  return Dismissible(
+                    background: Container(color: Colors.grey),
+                    key: ValueKey<int>(index),
+                    onDismissed: (DismissDirection direction) {
+                      viewModel.deleteTask(viewModel.taskList[index]["id"], index);
+                    },
+                    child: Card(
+                      child: ListTile(
+                        leading: Icon(Icons.list),
+                        title: Text(taskName),
+                        subtitle: taskDescription.isNotEmpty
+                            ? Text(
+                                taskDescription,
+                                style: TextStyle(color: Colors.grey),
+                              )
+                            : null,
+                        trailing: Wrap(
+                          children: [
+                            Checkbox(
+                              side: BorderSide(color: Colors.black, width: 2),
+                              value: viewModel.taskList[index]["conclusion"],
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  viewModel.toggleTaskConclusion(
+                                    viewModel.taskList[index]["id"],
+                                    index,
+                                  );
+                                });
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );

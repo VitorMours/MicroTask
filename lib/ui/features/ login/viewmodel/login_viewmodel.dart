@@ -25,6 +25,11 @@ class LoginViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void cleanControllers(){
+    emailController.clear();
+    passwordController.clear();
+  }
+
   Future<bool> authenticate() async {
     if (_formKey.currentState!.validate()) {
       final email = emailController.text;

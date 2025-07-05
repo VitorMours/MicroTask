@@ -61,6 +61,10 @@ abstract final class AppTheme {
   );
 
 
+  static final _drawerTheme = DrawerThemeData(
+    backgroundColor: AppColors.white,
+  );
+
   static final _appBarTheme = AppBarTheme(
       titleTextStyle: TextStyle(
         color: AppColors.black,
@@ -107,6 +111,7 @@ abstract final class AppTheme {
 
   static final lightTheme = ThemeData(
     brightness: Brightness.light,
+    drawerTheme: _drawerTheme,
     appBarTheme: _appBarTheme,
     textTheme: _textTheme,
     colorScheme: AppColors.lightColorScheme,
@@ -118,6 +123,7 @@ abstract final class AppTheme {
 
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
+    drawerTheme: _drawerTheme,
     appBarTheme: _appBarTheme,
     textTheme: _textTheme,
     colorScheme: AppColors.darkColorScheme,

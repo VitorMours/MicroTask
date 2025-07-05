@@ -74,6 +74,16 @@ class HomeViewModel extends ChangeNotifier {
     taskDescriptionController.clear();
   }
 
+  Future<void> deleteTask(int id, int index) async {
+    try{
+      taskList.removeWhere((task) => task['id'] == id);
+      await Supabase.instance.client.from("tasks").delete().eq("id", id);
+      notifyListeners();
+    }catch (e) {
+      debugPrint("Erro ao deletar valor da lista $e");
+    }
+  }
+
   Future<void> toggleTaskConclusion(int id, int index) async {
     final currentTask = _taskList[index];
     final previousValue = currentTask["conclusion"];
